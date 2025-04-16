@@ -26,6 +26,7 @@ impl Completer for CommandCompleter {
                 extra: None,
                 span: Span::new(0, line.len()),
                 append_whitespace: false,
+                prefix_string: None,
             })
             .collect()
     }

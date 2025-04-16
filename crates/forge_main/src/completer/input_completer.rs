@@ -42,14 +42,17 @@ impl Completer for InputCompleter {
                         let file_name_lower = file_name.to_lowercase();
                         let query_lower = query.term.to_lowercase();
                         if file_name_lower.contains(&query_lower) {
-                            let path_md_fmt = format!("[{}]", file.path);
+                            let name_md_fmt = format!("[{}]", file_name);
+                            let path_without_filename = file.path.to_string();
+                            let path_without_filename = path_without_filename.strip_suffix(file_name).unwrap_or(&path_without_filename);
                             Some(Suggestion {
                                 description: None,
-                                value: path_md_fmt,
+                                value: name_md_fmt,
                                 style: None,
                                 extra: None,
                                 span: query.span,
                                 append_whitespace: true,
+                                prefix_string: Some(path_without_filename.to_string()),
                             })
                         } else {
                             None
